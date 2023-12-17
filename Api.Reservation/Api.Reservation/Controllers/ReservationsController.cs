@@ -32,9 +32,9 @@ namespace Api.Reservation.Controllers
                 var reservationToCreate = new Datas.Entities.Reservation()
                 {
                     UtilisateurId = reservation.UtilisateurId,
-                    NumeroVol = reservation.NumeroVol,
-                    NumeroSiege = reservation.NumeroSiege,
-                    Statut = Datas.Entities.StatutReservation.Active,
+                    flightNumber = reservation.NumeroVol,
+/*                    NumeroSiege = reservation.NumeroSiege,
+*/                    Statut = Datas.Entities.StatutReservation.Active,
                     Changement = DateTime.Now
                 };
 

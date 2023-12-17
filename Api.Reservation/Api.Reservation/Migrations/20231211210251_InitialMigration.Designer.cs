@@ -3,6 +3,7 @@ using System;
 using Api.Reservation.Datas.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Reservation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231211210251_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,15 +31,15 @@ namespace Api.Reservation.Migrations
                     b.Property<DateTime>("Changement")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("NumeroVol")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("Statut")
                         .HasColumnType("int");
 
                     b.Property<int>("UtilisateurId")
                         .HasColumnType("int");
-
-                    b.Property<string>("flightNumber")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -48,10 +51,10 @@ namespace Api.Reservation.Migrations
                         new
                         {
                             Id = 1,
-                            Changement = new DateTime(2023, 12, 11, 23, 34, 38, 101, DateTimeKind.Local).AddTicks(2696),
+                            Changement = new DateTime(2023, 12, 11, 22, 2, 51, 122, DateTimeKind.Local).AddTicks(675),
+                            NumeroVol = "AV123",
                             Statut = 0,
-                            UtilisateurId = 1,
-                            flightNumber = "AV123"
+                            UtilisateurId = 1
                         });
                 });
 

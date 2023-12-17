@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,38 +7,45 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Api.Reservation.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "Utilisateurs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nom = table.Column<string>(type: "TEXT", nullable: false),
-                    Prenom = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
-                    DateNaissance = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nom = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Prenom = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DateNaissance = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Utilisateurs", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Reservations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UtilisateurId = table.Column<int>(type: "INTEGER", nullable: false),
-                    NumeroVol = table.Column<string>(type: "TEXT", nullable: false),
-                    NumeroSiege = table.Column<string>(type: "TEXT", nullable: false),
-                    Statut = table.Column<int>(type: "INTEGER", nullable: false),
-                    Changement = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false),
+                    NumeroVol = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Statut = table.Column<int>(type: "int", nullable: false),
+                    Changement = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +56,8 @@ namespace Api.Reservation.Migrations
                         principalTable: "Utilisateurs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
                 table: "Utilisateurs",
@@ -57,8 +66,8 @@ namespace Api.Reservation.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reservations",
-                columns: new[] { "Id", "Changement", "NumeroSiege", "NumeroVol", "Statut", "UtilisateurId" },
-                values: new object[] { 1, new DateTime(2023, 10, 28, 3, 30, 41, 716, DateTimeKind.Local).AddTicks(9213), "A1", "AV123", 0, 1 });
+                columns: new[] { "Id", "Changement", "NumeroVol", "Statut", "UtilisateurId" },
+                values: new object[] { 1, new DateTime(2023, 12, 11, 22, 2, 51, 122, DateTimeKind.Local).AddTicks(675), "AV123", 0, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_UtilisateurId",

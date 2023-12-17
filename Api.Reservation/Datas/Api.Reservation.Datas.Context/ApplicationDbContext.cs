@@ -69,9 +69,9 @@ namespace Api.Reservation.Datas.Context
                 {
                     Id = 1,
                     UtilisateurId = 1,
-                    NumeroVol = "AV123",
-                    NumeroSiege = "A1",
-                    Statut = StatutReservation.Active,
+                    flightNumber = "AV123",
+/*                    NumeroSiege = "A1",
+*/                    Statut = StatutReservation.Active,
                     Changement = DateTime.Now,
                 }
             // Ajoutez d'autres réservations ici si nécessaire

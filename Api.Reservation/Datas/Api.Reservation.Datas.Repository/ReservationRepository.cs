@@ -39,7 +39,7 @@ namespace Api.Reservation.Datas.Repository
         public async Task<List<Entities.Reservation>> GetReservationsByNumeroVolAsync(string numeroVol)
         {
             return await _context.Reservations
-                .Where(r => r.NumeroVol == numeroVol)
+                .Where(r => r.flightNumber == numeroVol)
                 .ToListAsync()
                 .ConfigureAwait(false);
         }

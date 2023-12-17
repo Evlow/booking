@@ -44,9 +44,9 @@ namespace Api.Reservation.Business.Service
         /// <param name="numeroVol">Le numéro du vol.</param>
         /// <param name="nomSiege">Le nom du siege</param>
         /// <returns></returns>
-        public async Task<Seat> GetSiegeStatusAsync(string numeroVol, string nomSiege)
+        public async Task<Seat> GetFlightNumberAsync(string numeroVol)
         {
-            return await _flightsApi.GetSiegeStatusAsync(numeroVol, nomSiege)
+            return await _flightsApi.GetFlightNumberAsync(numeroVol)
                 .ConfigureAwait(false);
         }
 
@@ -64,12 +64,8 @@ namespace Api.Reservation.Business.Service
                 throw new Exception($"\"Echec de création d'une reservation : L'utilisateur n'existe pas. : {reservation.UtilisateurId}");
 
 
-            var siegeStatus = await GetSiegeStatusAsync(reservation.NumeroVol, reservation.NumeroSiege);
+            var flightStatus = await GetFlightNumberAsync(reservation.flightNumber);
 
-            if (siegeStatus?.Status != "Disponible")
-            {
-                throw new BusinessException("Echec de création d'une reservation : Le siège n'est pas disponible.");
-            }
 
             // Le siège est disponible, procédez à la création de la réservation
             return await _reservationRepository.CreateReservationAsync(reservation)

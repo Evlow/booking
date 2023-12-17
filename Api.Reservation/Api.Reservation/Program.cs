@@ -11,7 +11,7 @@ IConfiguration configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddRefitClient<IFlightsApi>()
-          .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration.GetSection("Services:FlightApi").Value));
+          .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration.GetSection("Services:flight").Value));
 
 // Database link
 var connectionString = configuration.GetConnectionString("BddConnection");
@@ -43,12 +43,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
+//Configure the HTTP request pipeline.
+ if (app.Environment.IsDevelopment())
+ {
     app.UseSwagger();
     app.UseSwaggerUI();
-// }
+ }
 
 app.UseHttpsRedirection();
 

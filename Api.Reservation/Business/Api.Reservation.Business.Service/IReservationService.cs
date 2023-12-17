@@ -12,7 +12,7 @@ namespace Api.Reservation.Business.Service
         /// <param name="numeroVol">Le numéro du vol.</param>
         /// <param name="nomSiege">Le nom du siege</param>
         /// <returns></returns>
-        Task<Seat> GetSiegeStatusAsync(string numeroVol, string nomSiege);
+        Task<Seat> GetFlightNumberAsync(string numeroVol);
 
         /// <summary>
         /// Creates the reservation asynchronous.

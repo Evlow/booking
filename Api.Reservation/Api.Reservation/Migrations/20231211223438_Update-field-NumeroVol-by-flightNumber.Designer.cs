@@ -11,37 +11,35 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Reservation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231028013041_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231211223438_Update-field-NumeroVol-by-flightNumber")]
+    partial class UpdatefieldNumeroVolbyflightNumber
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Api.Reservation.Datas.Entities.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Changement")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NumeroSiege")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NumeroVol")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Statut")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("UtilisateurId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    b.Property<string>("flightNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -53,11 +51,10 @@ namespace Api.Reservation.Migrations
                         new
                         {
                             Id = 1,
-                            Changement = new DateTime(2023, 10, 28, 3, 30, 41, 716, DateTimeKind.Local).AddTicks(9213),
-                            NumeroSiege = "A1",
-                            NumeroVol = "AV123",
+                            Changement = new DateTime(2023, 12, 11, 23, 34, 38, 101, DateTimeKind.Local).AddTicks(2696),
                             Statut = 0,
-                            UtilisateurId = 1
+                            UtilisateurId = 1,
+                            flightNumber = "AV123"
                         });
                 });
 
@@ -65,22 +62,22 @@ namespace Api.Reservation.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateNaissance")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

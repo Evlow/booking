@@ -15,9 +15,9 @@ namespace Api.Reservation.Datas.Entities
         public int Id { get; set; }
         public int UtilisateurId { get; set; }
         public virtual Utilisateur Utilisateur { get; set; }
-        public string NumeroVol { get; set; }
-        public string NumeroSiege { get; set; }
-        public StatutReservation Statut { get; set; }
+        public string flightNumber { get; set; }
+/*        public string NumeroSiege { get; set; }
+*/        public StatutReservation Statut { get; set; }
         public DateTime Changement { get; set; }
     }
 }
